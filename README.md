@@ -24,7 +24,7 @@ Younesse Kaddar
 - [http://younesse.net/Architecture-systeme/RIM-Linux](http://younesse.net/Architecture-systeme/RIM-Linux)
 - Dépôt github : [https://github.com/youqad/RIM-Linux](https://github.com/youqad/RIM-Linux)
 
-- [version PDF](/assets/ArchiSysteme/RIM-Linux.pdf)
+- [version PDF](http://younesse.net/assets/ArchiSysteme/RIM-Linux.pdf)
 
 ___
 
