@@ -1,0 +1,5 @@
+url=$1
+domain=`echo $url | sed 's-^[^/]*/*\([^/]*\)/\?.*$-\1-'`
+ipaddr=`ping -c 1 $domain | sed -n 's@^.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\).*$@\1@p' | head -1`
+req_url=`echo $url | sed "s-/[^/]\+-/$ipaddr-"`
+wget $req_url

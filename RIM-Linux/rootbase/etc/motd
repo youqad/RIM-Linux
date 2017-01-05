@@ -1,0 +1,18 @@
+/  __\/ \/ \__/|  / \   / \/ \  /|/ \ /\\  \//
+|  \/|| || |\/||  | |   | || |\ ||| | || \  /
+|    /| || |  ||  | |_/\| || | \||| \_/| /  \
+\_/\_\\_/\_/  \|  \____/\_/\_/  \|\____//__/\\
+                    .--.
+                   |o_o |
+                   |:_/ |
+                  //   \ \
+                 (|     | )
+                /'\_   _/`\
+                \___)=(___/ 
+
+
+Use: 	'loadkmap < /etc/us.kmap' (en_US), 
+	'loadkmap < /etc/uk.kmap' (en_UK)
+    or 	'loadkmap < /etc/fr.kmap' (fr_FR) to change the keyboard mapping
+
+To display this message again : 'cat /etc/motd' 

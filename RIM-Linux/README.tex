@@ -1,0 +1,631 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdftitle={Projet RIM Linux},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Projet RIM Linux}
+\date{2016-10-14}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Projet Architecture et Système.
+\end{abstract}
+
+\section{Création du RIM-Linux}\label{cruxe9ation-du-rim-linux}
+
+Younesse Kaddar
+
+En ligne : \url{http://younesse.net/Architecture-systeme/RIM-Linux}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Le fichier de configuration du noyau utilisé est le fichier
+  \texttt{config\_kernel}
+\item
+  L'image iso est \texttt{output.iso}
+\end{enumerate}
+
+\section{Le noyau Linux}\label{le-noyau-linux}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mkdir} \NormalTok{-p build kernel RIM-Linux/rootbase}
+
+\BuiltInTok{cd} \NormalTok{kernel}
+
+\FunctionTok{wget} \NormalTok{https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.xz}
+\FunctionTok{tar} \NormalTok{-xJf linux-4.9.tar.xz}
+\FunctionTok{rm} \NormalTok{linux-4.9.tar.xz}
+\BuiltInTok{cd} \NormalTok{linux-4.9}
+
+\FunctionTok{make} \NormalTok{nconfig}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  Décocher \texttt{Enable\ loadable\ module\ support}
+\item
+  Dans General Setup :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ne laisser que le support de l'initrd/l'initramfs
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make} \NormalTok{-j11 bzImage}
+\end{Highlighting}
+\end{Shaded}
+
+\section{BusyBox}\label{busybox}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd} \NormalTok{../build}
+\FunctionTok{wget} \NormalTok{http://www.busybox.net/downloads/busybox-1.26.0.tar.bz2}
+\FunctionTok{bzip2} \NormalTok{-d busybox-1.26.0.tar.bz2}
+\FunctionTok{tar} \NormalTok{xvf busybox-1.26.0.tar}
+\FunctionTok{rm} \NormalTok{busybox-1.26.0.tar}
+\BuiltInTok{cd} \NormalTok{busybox-1.26.0}
+\FunctionTok{make} \NormalTok{menuconfig}
+\FunctionTok{make} \NormalTok{-j11}
+\FunctionTok{make} \NormalTok{-j11 install}
+
+\FunctionTok{cp} \NormalTok{-a ./_install/* ../../RIM-Linux/rootbase}
+
+\BuiltInTok{cd} \NormalTok{../../RIM-Linux/}
+
+
+\FunctionTok{ldd} \NormalTok{rootbase/bin/busybox}
+\end{Highlighting}
+\end{Shaded}
+
+qui renvoie :
+
+\begin{verbatim}
+    linux-vdso.so.1 =>  (0x00007ffc42a9b000)
+    libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffa52a51000)
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffa5268c000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007ffa52d57000)
+\end{verbatim}
+
+Puis :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mkdir} \NormalTok{-p rootbase/lib/x86_64-linux-gnu/ rootbase/lib64}
+
+\FunctionTok{cp} \NormalTok{/lib/x86_64-linux-gnu/}\DataTypeTok{\{libm.so.6,libc.so.6\}} \NormalTok{rootbase/lib/x86_64-linux-gnu/}
+
+\FunctionTok{cp} \NormalTok{/lib64/ld-linux-x86-64.so.2 rootbase/lib64/}
+
+
+\FunctionTok{strip} \NormalTok{-v rootbase/lib/x86_64-linux-gnu/* rootbase/lib64/*}
+
+\BuiltInTok{cd} \NormalTok{rootbase}
+
+\FunctionTok{rm} \NormalTok{linuxrc}
+
+\FunctionTok{ln} \NormalTok{-s bin/busybox init}
+\end{Highlighting}
+\end{Shaded}
+
+On va récupérer la trame mise à notre disposition :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cp} \NormalTok{~fhh/share/tp/projet/rim.linux.template.tbz2 ./}
+
+\FunctionTok{bzip2} \NormalTok{-d rim.linux.template.tbz2}
+
+\FunctionTok{tar} \NormalTok{xvf rim.linux.template.tar}
+
+\FunctionTok{rm} \NormalTok{rim.linux.template.tar}
+\end{Highlighting}
+\end{Shaded}
+
+Puis :
+
+\begin{itemize}
+\item
+  On change le nom de l'utilisateur dans
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{etc/passwd}
+  \end{itemize}
+\item
+  Dans \texttt{etc/init.d/rcS} :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    on décommente la ligne
+    \texttt{busybox\ loadkmap\ \textless{}\ /etc/fr.kmap} pour activer
+    le clavier français (on ajoutera un fichier \texttt{etc/fr.kmap} est
+    bien présent)
+  \item
+    on change le nom d'hôte : \texttt{/bin/hostname\ RIM-Linux}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Archive cpio de l'initramfs et
+isolinux}\label{archive-cpio-de-linitramfs-et-isolinux}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\BuiltInTok{cd} \NormalTok{..}
+
+\FunctionTok{mkdir} \NormalTok{-p rootcd/}\DataTypeTok{\{boot,isolinux\}}
+
+\FunctionTok{cp} \NormalTok{../kernel/linux-4.9/arch/x86_64/boot/bzImage rootcd/boot/vmlinuz}
+
+\FunctionTok{find} \NormalTok{rootbase/* -print }\KeywordTok{|} \FunctionTok{cpio} \NormalTok{-o -Hnewc }\OperatorTok{>} \NormalTok{root}
+
+\FunctionTok{cat} \NormalTok{root }\KeywordTok{|} \FunctionTok{gzip} \NormalTok{-9 }\OperatorTok{>} \NormalTok{rootcd/boot/root.gz}
+
+\FunctionTok{rm} \NormalTok{root}
+\end{Highlighting}
+\end{Shaded}
+
+On récupère isolinux
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\BuiltInTok{cd} \NormalTok{../build}
+
+\FunctionTok{wget} \NormalTok{https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.xz}
+
+\FunctionTok{tar} \NormalTok{xJf syslinux-6.03.tar.xz}
+
+\FunctionTok{rm} \NormalTok{syslinux-6.03.tar.xz}
+
+\BuiltInTok{cd} \NormalTok{..}
+
+\FunctionTok{cp} \NormalTok{build/syslinux-6.03/bios/core/isolinux.bin RIM-Linux/rootcd/isolinux}
+
+\FunctionTok{cp} \NormalTok{build/syslinux-6.03/bios/com32/elflink/ldlinux/ldlinux.c32 RIM-Linux/rootcd/isolinux}
+\end{Highlighting}
+\end{Shaded}
+
+Puis, on crée les fichiers
+
+\begin{itemize}
+\item
+  \texttt{RIM-Linux/rootcd/isolinux/isolinux.cfg} :
+
+\begin{verbatim}
+display boot.txt
+
+default 1
+
+label 1
+    kernel /boot/vmlinuz
+    append initrd=/boot/root.gz
+\end{verbatim}
+\item
+  \texttt{RIM-Linux/rootcd/isolinux/boot.txt} : le message de bienvenue
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd} \NormalTok{RIM-Linux}
+
+\ExtensionTok{mkisofs} \NormalTok{-o output.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table rootcd}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Shell personnalisé}\label{shell-personnalisuxe9}
+
+On se place à la racine du répertoire \texttt{RIM-Linux}.
+
+Dans \texttt{rootbase/etc/inittab}, on remplace \texttt{/bin/sh} par
+\texttt{/bin/shell}, en ayant pris soin de placer notre shell
+personnalisé \texttt{shell} dans \texttt{rootbase/bin/shell}.
+
+Il reste à ajouter les bibliothèques qu'utilise \texttt{shell} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ldd} \NormalTok{shell}
+\end{Highlighting}
+\end{Shaded}
+
+renvoie
+
+\begin{verbatim}
+linux-vdso.so.1 =>  (0x00007ffe3ba9a000)
+libreadline.so.6 => /lib/x86_64-linux-gnu/libreadline.so.6 (0x00007fb5dd018000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb5dcc53000)
+libtinfo.so.5 => /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fb5dca2a000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fb5dd25e000)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cp} \NormalTok{/lib/x86_64-linux-gnu/libreadline.so.6 rootbase/lib/x86_64-linux-gnu/}
+
+\FunctionTok{cp} \NormalTok{/lib/x86_64-linux-gnu/libc.so.6 rootbase/lib/x86_64-linux-gnu/}
+
+\FunctionTok{cp} \NormalTok{/lib/x86_64-linux-gnu/libtinfo.so.5 rootbase/lib/x86_64-linux-gnu/}
+\end{Highlighting}
+\end{Shaded}
+
+(\texttt{cp\ /lib64/ld-linux-x86-64.so.2\ rootbase/lib64/} : déjà fait
+précédemment).
+
+Puis, ne pas oublier :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{strip} \NormalTok{-v lib/x86_64-linux-gnu/*}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Clavier}\label{clavier}
+
+Dans \texttt{rootbase/etc/init.d/rcS}, on veillera bien à décommenter la
+ligne \texttt{busybox\ loadkmap\ \textless{}\ /etc/fr.kmap}.
+
+Puis :
+
+\begin{itemize}
+\tightlist
+\item
+  Si on a les droits administrateurs (ce qui n'est pas le cas sur les
+  machines de l'ENS) : ``` su
+\end{itemize}
+
+../build/busybox-1.26.0/\_install/bin/busybox dumpkmap \textgreater{}
+rootbase/etc/fr.kmap
+
+\begin{verbatim}
+
+- Sinon :
+\end{verbatim}
+
+cd rootbase/etc/
+
+wget http://younesse.net/assets/ArchiSysteme/fr.kmap
+
+cd ../..
+
+\begin{verbatim}
+
+Pour le message d'accueil indiquant comment passer le système en clavier français ou anglais, créer :
+
+- `rootbase/etc/motd` : le message de bienvenue
+
+    ```
+    /  __\/ \/ \__/|  / \   / \/ \  /|/ \ /\\  \//
+    |  \/|| || |\/||  | |   | || |\ ||| | || \  /
+    |    /| || |  ||  | |_/\| || | \||| \_/| /  \
+    \_/\_\\_/\_/  \|  \____/\_/\_/  \|\____//__/\\
+                        .--.
+                       |o_o |
+                       |:_/ |
+                      //   \ \
+                     (|     | )
+                    /'\_   _/`\
+                    \___)=(___/  
+    Use:    'loadkmap < /etc/us.kmap' (en_US),
+            'loadkmap < /etc/uk.kmap' (en_UK)
+        or  'loadkmap < /etc/fr.kmap' (fr_FR) to change the keyboard mapping
+
+    To display this message again : 'cat /etc/motd'
+    ```
+
+    - Puis :
+
+        - dans `rootbase/etc/init.d/rcS`, ajouter la ligne :
+
+            ```sh
+            /etc/init.d/monscript
+            ```
+        - créer `rootbase/etc/init.d/monscript` :
+
+            ```sh
+            cat /etc/motd
+            ```
+
+# Réseau
+\end{verbatim}
+
+mkdir -p rootbase/usr/share/udhcpc/
+
+cp ../build/busybox-1.26.0/examples/udhcp/simple.script
+rootbase/usr/share/udhcpc/default.script
+
+chmod +x rootbase/usr/share/udhcpc/default.script
+
+\begin{verbatim}
+
+Puis ajouter les lignes suivantes au fichier `rootbase/etc/init.d/rcS` :
+\end{verbatim}
+
+ifconfig eth0 up udhcpc -i eth0 ```
+
+Enfin :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd} \NormalTok{rootbase}
+\BuiltInTok{echo} \StringTok{"127.0.0.1      localhost"} \OperatorTok{>} \NormalTok{etc/hosts}
+\BuiltInTok{echo} \StringTok{"localnet    127.0.0.1"} \OperatorTok{>} \NormalTok{etc/networks}
+\BuiltInTok{echo} \StringTok{"RIM-Linux"} \OperatorTok{>} \NormalTok{etc/hostname}
+\BuiltInTok{echo} \StringTok{"order hosts,bind"} \OperatorTok{>} \NormalTok{etc/host.conf}
+\BuiltInTok{echo} \StringTok{"multi on"} \OperatorTok{>>} \NormalTok{etc/host.conf}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Configurations
+supplémentaires}\label{configurations-suppluxe9mentaires}
+
+Pour une configuration plus exhaustive, on peut créer les fichiers :
+
+\begin{itemize}
+\item
+  \texttt{rootbase/etc/nsswitch.conf} :
+
+\begin{verbatim}
+# /etc/nsswitch.conf: GNU Name Service Switch config.
+
+passwd:     files
+group:      files
+shadow:     files
+
+hosts:      files dns
+networks:   files
+\end{verbatim}
+\item
+  \texttt{rootbase/etc/securetty} :
+
+\begin{verbatim}
+# /etc/securetty: List of terminals on which root is allowed to login.
+
+console
+
+# For people with serial port consoles
+ttyS0
+
+# Standard consoles
+tty1
+tty2
+tty3
+tty4
+tty5
+tty6
+tty7
+\end{verbatim}
+\item
+  \texttt{rootbase/etc/shells} :
+
+\begin{verbatim}
+# /etc/shells: valid login shells.
+/bin/shell
+/bin/sh
+/bin/ash
+/bin/hush
+\end{verbatim}
+\item
+  \texttt{rootbase/etc/issue} :
+
+\begin{verbatim}
+RIM-Linux, Younesse Kaddar \r \l
+\end{verbatim}
+\item
+  \texttt{rootbase/etc/busybox.conf} :
+
+\begin{verbatim}
+# /etc/busybox.conf: Busybox configuration.
+
+[SUID]
+# Allow command to be run by anyone.
+su = ssx root.root
+passwd = ssx root.root
+loadkmap = ssx root.root
+mount = ssx root.root
+reboot = ssx root.root
+halt = ssx root.root
+\end{verbatim}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    on veillera aussi à protéger ce fichier :
+  \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chmod} \NormalTok{600 rootbase/etc/busybox.conf}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+\section{Utilitaires}\label{utilitaires}
+
+Les scripts \texttt{cpio\_creator}, \texttt{kernel\_copy},
+\texttt{rebuild\_iso}, \texttt{send\_home} créés à la racine de
+\texttt{RIM-Linux/} automatisent certaines tâches répétitives effectuées
+pendant les tests.
+
+\begin{itemize}
+\item
+  \texttt{cpio\_creator} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#!/bin/sh}
+\VariableTok{HERE=$(}\BuiltInTok{pwd}\VariableTok{)}
+\VariableTok{ROOTBASE=}\NormalTok{./rootbase}
+\BuiltInTok{echo} \StringTok{"The path is : }\VariableTok{$ROOTBASE}\StringTok{."}
+\BuiltInTok{echo} \StringTok{"Creating ..."}
+\BuiltInTok{cd} \VariableTok{$ROOTBASE}
+\FunctionTok{find} \NormalTok{./* -print }\KeywordTok{|} \FunctionTok{cpio} \NormalTok{-o -Hnewc }\OperatorTok{>} \VariableTok{$HERE}\NormalTok{/root}
+\BuiltInTok{cd} \VariableTok{$HERE}
+\FunctionTok{cat} \NormalTok{root }\KeywordTok{|} \FunctionTok{gzip} \NormalTok{-9 }\OperatorTok{>} \NormalTok{root.gz}
+\FunctionTok{rm} \NormalTok{root}
+\FunctionTok{mv} \NormalTok{root.gz rootcd/boot}
+\BuiltInTok{echo} \StringTok{"Done."}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{kernel\_copy} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#!/bin/sh}
+\FunctionTok{cp} \NormalTok{../kernel/linux-4.9/arch/x86_64/boot/bzImage rootcd/boot/vmlinuz}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{rebuild\_iso\ {[}options{]}} : crée l'image iso du RIM Linux
+  et la lit avec \texttt{qemu}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    options :
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{-kernel} : copie le noyau \texttt{bzImage} créé dans le
+      répertoire \texttt{../kernel}
+    \item
+      \texttt{-kvm} : lance \texttt{qemu} avec l'option
+      \texttt{-enable-kvm}
+    \end{itemize}
+  \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#!/bin/sh}
+\ExtensionTok{./cpio_creator}
+\KeywordTok{if}\BuiltInTok{ [} \StringTok{"}\VariableTok{$1}\StringTok{"} \OtherTok{==} \StringTok{"-kernel"}\BuiltInTok{ ]} \KeywordTok{||}\BuiltInTok{ [} \StringTok{"}\VariableTok{$2}\StringTok{"} \OtherTok{==} \StringTok{"-kernel"}\BuiltInTok{ ]} \NormalTok{; }\KeywordTok{then}
+  \ExtensionTok{./kernel_copy}
+  \BuiltInTok{echo} \StringTok{"Kernel copied"}
+\KeywordTok{else}
+  \BuiltInTok{echo} \StringTok{"Kernel not copied"}
+\KeywordTok{fi}
+\ExtensionTok{mkisofs} \NormalTok{-o output.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table rootcd}
+
+\KeywordTok{if}\BuiltInTok{ [} \StringTok{"}\VariableTok{$1}\StringTok{"} \OtherTok{==} \StringTok{"-kvm"}\BuiltInTok{ ]} \KeywordTok{||}\BuiltInTok{ [} \StringTok{"}\VariableTok{$2}\StringTok{"} \OtherTok{==} \StringTok{"-kvm"}\BuiltInTok{ ]} \NormalTok{; }\KeywordTok{then}
+  \BuiltInTok{echo} \StringTok{"Qemu : KVM enabled"}
+  \ExtensionTok{qemu-system-x86_64} \NormalTok{-m 4G -enable-kvm -cdrom output.iso}
+\KeywordTok{else}
+  \BuiltInTok{echo} \StringTok{"Qemu : KVM disabled"}
+  \ExtensionTok{qemu-system-x86_64} \NormalTok{-m 4G -cdrom output.iso}
+\KeywordTok{fi}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{send\_home} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#!/bin/sh}
+\FunctionTok{rm} \NormalTok{-rf ~/RIM-Linux}
+\FunctionTok{cp} \NormalTok{-R ../RIM-Linux/ ~/                   }
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+\end{document}

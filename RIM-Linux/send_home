@@ -1,0 +1,2 @@
+rm -rf ~/RIM-Linux
+cp -R ../RIM-Linux/ ~/

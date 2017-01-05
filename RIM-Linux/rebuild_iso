@@ -1,0 +1,16 @@
+./cpio_creator
+if [ "$1" == "-kernel" ] || [ "$2" == "-kernel" ] ; then
+  ./kernel_copy
+  echo "Kernel copied"
+else
+  echo "Kernel not copied"
+fi
+mkisofs -o output.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table rootcd
+
+if [ "$1" == "-kvm" ] || [ "$2" == "-kvm" ] ; then
+  echo "Qemu : KVM enabled"
+  qemu-system-x86_64 -m 4G -enable-kvm -cdrom output.iso
+else
+  echo "Qemu : KVM disabled"
+  qemu-system-x86_64 -m 4G -cdrom output.iso
+fi

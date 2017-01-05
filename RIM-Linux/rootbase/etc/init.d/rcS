@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Montage des partitions
+mount -n -a
+
+
+# Exemple de configuration de clavier
+busybox loadkmap < /etc/fr.kmap
+
+# Hostname
+/bin/hostname RIM-Linux
+
+# Loopback
+/sbin/ifconfig lo up
+
+# DHCP
+#/sbin/ifconfig eth0 up 
+
+/sbin/udhcpc
+
+
+
+
+# Scripts personalisés
+/etc/init.d/monscript

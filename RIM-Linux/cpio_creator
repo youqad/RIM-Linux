@@ -1,0 +1,12 @@
+#!/bin/sh
+HERE=$(pwd)
+ROOTBASE=./rootbase
+echo "The path is : $ROOTBASE."
+echo "Creating ..."
+cd $ROOTBASE
+find ./* -print | cpio -o -Hnewc > $HERE/root
+cd $HERE
+cat root | gzip -9 > root.gz
+rm root
+mv root.gz rootcd/boot
+echo "Done."
