@@ -104,7 +104,18 @@ Projet Architecture et Système.
 
 Younesse Kaddar
 
-En ligne : \url{http://younesse.net/Architecture-systeme/RIM-Linux}
+\emph{En ligne} :
+
+\begin{itemize}
+\item
+  \url{http://younesse.net/Architecture-systeme/RIM-Linux}
+\item
+  Dépôt github : \url{https://github.com/youqad/RIM-Linux}
+\item
+  \href{/assets/ArchiSysteme/RIM-Linux.pdf}{version PDF}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -249,7 +260,6 @@ isolinux}\label{archive-cpio-de-linitramfs-et-isolinux}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-
 \BuiltInTok{cd} \NormalTok{..}
 
 \FunctionTok{mkdir} \NormalTok{-p rootcd/}\DataTypeTok{\{boot,isolinux\}}
@@ -288,8 +298,10 @@ On récupère isolinux
 Puis, on crée les fichiers
 
 \begin{itemize}
+\tightlist
 \item
   \texttt{RIM-Linux/rootcd/isolinux/isolinux.cfg} :
+\end{itemize}
 
 \begin{verbatim}
 display boot.txt
@@ -300,6 +312,9 @@ label 1
     kernel /boot/vmlinuz
     append initrd=/boot/root.gz
 \end{verbatim}
+
+\begin{itemize}
+\tightlist
 \item
   \texttt{RIM-Linux/rootcd/isolinux/boot.txt} : le message de bienvenue
 \end{itemize}
@@ -370,77 +385,109 @@ Puis :
 \tightlist
 \item
   Si on a les droits administrateurs (ce qui n'est pas le cas sur les
-  machines de l'ENS) : ``` su
+  machines de l'ENS) :
 \end{itemize}
 
-../build/busybox-1.26.0/\_install/bin/busybox dumpkmap \textgreater{}
-rootbase/etc/fr.kmap
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{su}
+
+\ExtensionTok{../build/busybox-1.26.0/_install/bin/busybox} \NormalTok{dumpkmap }\OperatorTok{>} \NormalTok{rootbase/etc/fr.kmap}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Sinon :
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd} \NormalTok{rootbase/etc/}
+
+\FunctionTok{wget} \NormalTok{http://younesse.net/assets/ArchiSysteme/fr.kmap}
+
+\FunctionTok{wget} \NormalTok{http://younesse.net/assets/ArchiSysteme/us.kmap}
+
+\FunctionTok{wget} \NormalTok{http://younesse.net/assets/ArchiSysteme/uk.kmap}
+
+\BuiltInTok{cd} \NormalTok{../..}
+\end{Highlighting}
+\end{Shaded}
+
+Pour le message d'accueil indiquant comment passer le système en clavier
+français ou anglais, créer :
+
+\begin{itemize}
+\item
+  \texttt{rootbase/etc/motd} : le message de bienvenue
 
 \begin{verbatim}
+/  __\/ \/ \__/|  / \   / \/ \  /|/ \ /\\  \//
+|  \/|| || |\/||  | |   | || |\ ||| | || \  /
+|    /| || |  ||  | |_/\| || | \||| \_/| /  \
+\_/\_\\_/\_/  \|  \____/\_/\_/  \|\____//__/\\
+                    .--.
+                   |o_o |
+                   |:_/ |
+                  //   \ \
+                 (|     | )
+                /'\_   _/`\
+                \___)=(___/  
+Use:    'loadkmap < /etc/us.kmap' (en_US),
+        'loadkmap < /etc/uk.kmap' (en_UK)
+    or  'loadkmap < /etc/fr.kmap' (fr_FR) to change the keyboard mapping
 
-- Sinon :
+To display this message again : 'cat /etc/motd'
 \end{verbatim}
 
-cd rootbase/etc/
+  \begin{itemize}
+  \item
+    Puis :
 
-wget http://younesse.net/assets/ArchiSysteme/fr.kmap
+    \begin{itemize}
+    \item
+      dans \texttt{rootbase/etc/init.d/rcS}, ajouter la ligne :
 
-cd ../..
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/etc/init.d/monscript}
+\end{Highlighting}
+\end{Shaded}
+    \item
+      créer \texttt{rootbase/etc/init.d/monscript} :
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat} \NormalTok{/etc/motd}
+\end{Highlighting}
+\end{Shaded}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
-Pour le message d'accueil indiquant comment passer le système en clavier français ou anglais, créer :
+\section{Réseau}\label{ruxe9seau}
 
-- `rootbase/etc/motd` : le message de bienvenue
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mkdir} \NormalTok{-p rootbase/usr/share/udhcpc/}
 
-    ```
-    /  __\/ \/ \__/|  / \   / \/ \  /|/ \ /\\  \//
-    |  \/|| || |\/||  | |   | || |\ ||| | || \  /
-    |    /| || |  ||  | |_/\| || | \||| \_/| /  \
-    \_/\_\\_/\_/  \|  \____/\_/\_/  \|\____//__/\\
-                        .--.
-                       |o_o |
-                       |:_/ |
-                      //   \ \
-                     (|     | )
-                    /'\_   _/`\
-                    \___)=(___/  
-    Use:    'loadkmap < /etc/us.kmap' (en_US),
-            'loadkmap < /etc/uk.kmap' (en_UK)
-        or  'loadkmap < /etc/fr.kmap' (fr_FR) to change the keyboard mapping
+\FunctionTok{cp} \NormalTok{../build/busybox-1.26.0/examples/udhcp/simple.script rootbase/usr/share/udhcpc/default.script}
 
-    To display this message again : 'cat /etc/motd'
-    ```
+\FunctionTok{chmod} \NormalTok{+x rootbase/usr/share/udhcpc/default.script}
+\end{Highlighting}
+\end{Shaded}
 
-    - Puis :
+Puis ajouter les lignes suivantes au fichier
+\texttt{rootbase/etc/init.d/rcS} :
 
-        - dans `rootbase/etc/init.d/rcS`, ajouter la ligne :
-
-            ```sh
-            /etc/init.d/monscript
-            ```
-        - créer `rootbase/etc/init.d/monscript` :
-
-            ```sh
-            cat /etc/motd
-            ```
-
-# Réseau
-\end{verbatim}
-
-mkdir -p rootbase/usr/share/udhcpc/
-
-cp ../build/busybox-1.26.0/examples/udhcp/simple.script
-rootbase/usr/share/udhcpc/default.script
-
-chmod +x rootbase/usr/share/udhcpc/default.script
-
-\begin{verbatim}
-
-Puis ajouter les lignes suivantes au fichier `rootbase/etc/init.d/rcS` :
-\end{verbatim}
-
-ifconfig eth0 up udhcpc -i eth0 ```
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{ifconfig} \NormalTok{eth0 up}
+\ExtensionTok{udhcpc} \NormalTok{-i eth0}
+\end{Highlighting}
+\end{Shaded}
 
 Enfin :
 
@@ -461,49 +508,67 @@ supplémentaires}\label{configurations-suppluxe9mentaires}
 Pour une configuration plus exhaustive, on peut créer les fichiers :
 
 \begin{itemize}
+\tightlist
 \item
   \texttt{rootbase/etc/nsswitch.conf} :
+\end{itemize}
 
-\begin{verbatim}
-# /etc/nsswitch.conf: GNU Name Service Switch config.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# /etc/nsswitch.conf: GNU Name Service Switch config.}
 
-passwd:     files
-group:      files
-shadow:     files
+\ExtensionTok{passwd}\NormalTok{:     files}
+\ExtensionTok{group}\NormalTok{:      files}
+\ExtensionTok{shadow}\NormalTok{:     files}
 
-hosts:      files dns
-networks:   files
-\end{verbatim}
+\ExtensionTok{hosts}\NormalTok{:      files dns}
+\ExtensionTok{networks}\NormalTok{:   files}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
 \item
   \texttt{rootbase/etc/securetty} :
+\end{itemize}
 
-\begin{verbatim}
-# /etc/securetty: List of terminals on which root is allowed to login.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# /etc/securetty: List of terminals on which root is allowed to login.}
 
-console
+\ExtensionTok{console}
 
-# For people with serial port consoles
-ttyS0
+\CommentTok{# For people with serial port consoles}
+\ExtensionTok{ttyS0}
 
-# Standard consoles
-tty1
-tty2
-tty3
-tty4
-tty5
-tty6
-tty7
-\end{verbatim}
+\CommentTok{# Standard consoles}
+\ExtensionTok{tty1}
+\ExtensionTok{tty2}
+\ExtensionTok{tty3}
+\ExtensionTok{tty4}
+\ExtensionTok{tty5}
+\ExtensionTok{tty6}
+\ExtensionTok{tty7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
 \item
   \texttt{rootbase/etc/shells} :
+\end{itemize}
 
-\begin{verbatim}
-# /etc/shells: valid login shells.
-/bin/shell
-/bin/sh
-/bin/ash
-/bin/hush
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# /etc/shells: valid login shells.}
+\ExtensionTok{/bin/shell}
+\ExtensionTok{/bin/sh}
+\ExtensionTok{/bin/ash}
+\ExtensionTok{/bin/hush}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
 \item
   \texttt{rootbase/etc/issue} :
 
@@ -512,32 +577,30 @@ RIM-Linux, Younesse Kaddar \r \l
 \end{verbatim}
 \item
   \texttt{rootbase/etc/busybox.conf} :
+\end{itemize}
 
-\begin{verbatim}
-# /etc/busybox.conf: Busybox configuration.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# /etc/busybox.conf: Busybox configuration.}
 
-[SUID]
-# Allow command to be run by anyone.
-su = ssx root.root
-passwd = ssx root.root
-loadkmap = ssx root.root
-mount = ssx root.root
-reboot = ssx root.root
-halt = ssx root.root
-\end{verbatim}
+\NormalTok{[}\ExtensionTok{SUID}\NormalTok{]}
+\CommentTok{# Allow command to be run by anyone.}
+\FunctionTok{su} \NormalTok{= ssx root.root}
+\FunctionTok{passwd} \NormalTok{= ssx root.root}
+\ExtensionTok{loadkmap} \NormalTok{= ssx root.root}
+\FunctionTok{mount} \NormalTok{= ssx root.root}
+\ExtensionTok{reboot} \NormalTok{= ssx root.root}
+\ExtensionTok{halt} \NormalTok{= ssx root.root}
+\end{Highlighting}
+\end{Shaded}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    on veillera aussi à protéger ce fichier :
-  \end{itemize}
+⟶ on veillera aussi à protéger ce fichier :
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{chmod} \NormalTok{600 rootbase/etc/busybox.conf}
 \end{Highlighting}
 \end{Shaded}
-\end{itemize}
 
 \section{Utilitaires}\label{utilitaires}
 
@@ -547,8 +610,10 @@ Les scripts \texttt{cpio\_creator}, \texttt{kernel\_copy},
 pendant les tests.
 
 \begin{itemize}
+\tightlist
 \item
   \texttt{cpio\_creator} :
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -566,15 +631,22 @@ pendant les tests.
 \BuiltInTok{echo} \StringTok{"Done."}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{itemize}
+\tightlist
 \item
   \texttt{kernel\_copy} :
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+
 \CommentTok{#!/bin/sh}
 \FunctionTok{cp} \NormalTok{../kernel/linux-4.9/arch/x86_64/boot/bzImage rootcd/boot/vmlinuz}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{itemize}
 \item
   \texttt{rebuild\_iso\ {[}options{]}} : crée l'image iso du RIM Linux
   et la lit avec \texttt{qemu}
@@ -594,6 +666,7 @@ pendant les tests.
       \texttt{-enable-kvm}
     \end{itemize}
   \end{itemize}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -616,16 +689,19 @@ pendant les tests.
 \KeywordTok{fi}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{itemize}
+\tightlist
 \item
   \texttt{send\_home} :
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{#!/bin/sh}
 \FunctionTok{rm} \NormalTok{-rf ~/RIM-Linux}
-\FunctionTok{cp} \NormalTok{-R ../RIM-Linux/ ~/                   }
+\FunctionTok{cp} \NormalTok{-R ../RIM-Linux/ ~/}
 \end{Highlighting}
 \end{Shaded}
-\end{itemize}
 
 \end{document}

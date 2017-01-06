@@ -24,7 +24,7 @@ Younesse Kaddar
 - [http://younesse.net/Architecture-systeme/RIM-Linux](http://younesse.net/Architecture-systeme/RIM-Linux)
 - Dépôt github : [https://github.com/youqad/RIM-Linux](https://github.com/youqad/RIM-Linux)
 
-- [version PDF](http://younesse.net/assets/ArchiSysteme/RIM-Linux.pdf)
+- [version PDF](/assets/ArchiSysteme/RIM-Linux.pdf)
 
 ___
 
@@ -143,7 +143,6 @@ Puis :
 ## Archive cpio de l'initramfs et isolinux
 
 ```sh
-
 cd ..
 
 mkdir -p rootcd/{boot,isolinux}
@@ -182,15 +181,15 @@ Puis, on crée les fichiers
 
 - `RIM-Linux/rootcd/isolinux/isolinux.cfg` :
 
-    ```
-    display boot.txt
+```
+display boot.txt
 
-    default 1
+default 1
 
-    label 1
-        kernel /boot/vmlinuz
-        append initrd=/boot/root.gz
-    ```
+label 1
+    kernel /boot/vmlinuz
+    append initrd=/boot/root.gz
+```
 
 - `RIM-Linux/rootcd/isolinux/boot.txt` : le message de bienvenue
 
@@ -247,7 +246,8 @@ Dans `rootbase/etc/init.d/rcS`, on veillera bien à décommenter la ligne `busyb
 Puis :
 
 - Si on a les droits administrateurs (ce qui n'est pas le cas sur les machines de l'ENS) :
-```
+
+```sh
 su
 
 ../build/busybox-1.26.0/_install/bin/busybox dumpkmap > rootbase/etc/fr.kmap
@@ -255,11 +255,14 @@ su
 
 - Sinon :
 
-```
+```sh
 cd rootbase/etc/
 
 wget http://younesse.net/assets/ArchiSysteme/fr.kmap
 
+wget http://younesse.net/assets/ArchiSysteme/us.kmap
+
+wget http://younesse.net/assets/ArchiSysteme/uk.kmap
 
 cd ../..
 ```
@@ -268,24 +271,22 @@ Pour le message d'accueil indiquant comment passer le système en clavier franç
 
 - `rootbase/etc/motd` : le message de bienvenue
 
-    ```
-    /  __\/ \/ \__/|  / \   / \/ \  /|/ \ /\\  \//
-    |  \/|| || |\/||  | |   | || |\ ||| | || \  /
-    |    /| || |  ||  | |_/\| || | \||| \_/| /  \
-    \_/\_\\_/\_/  \|  \____/\_/\_/  \|\____//__/\\
-                        .--.
-                       |o_o |
-                       |:_/ |
-                      //   \ \
-                     (|     | )
-                    /'\_   _/`\
-                    \___)=(___/  
-    Use:    'loadkmap < /etc/us.kmap' (en_US),
-            'loadkmap < /etc/uk.kmap' (en_UK)
-        or  'loadkmap < /etc/fr.kmap' (fr_FR) to change the keyboard mapping
+        /  __\/ \/ \__/|  / \   / \/ \  /|/ \ /\\  \//
+        |  \/|| || |\/||  | |   | || |\ ||| | || \  /
+        |    /| || |  ||  | |_/\| || | \||| \_/| /  \
+        \_/\_\\_/\_/  \|  \____/\_/\_/  \|\____//__/\\
+                            .--.
+                           |o_o |
+                           |:_/ |
+                          //   \ \
+                         (|     | )
+                        /'\_   _/`\
+                        \___)=(___/  
+        Use:    'loadkmap < /etc/us.kmap' (en_US),
+                'loadkmap < /etc/uk.kmap' (en_UK)
+            or  'loadkmap < /etc/fr.kmap' (fr_FR) to change the keyboard mapping
 
-    To display this message again : 'cat /etc/motd'
-    ```
+        To display this message again : 'cat /etc/motd'
 
     - Puis :
 
@@ -302,8 +303,7 @@ Pour le message d'accueil indiquant comment passer le système en clavier franç
 
 # Réseau
 
-```
-
+```sh
 mkdir -p rootbase/usr/share/udhcpc/
 
 cp ../build/busybox-1.26.0/examples/udhcp/simple.script rootbase/usr/share/udhcpc/default.script
@@ -313,7 +313,7 @@ chmod +x rootbase/usr/share/udhcpc/default.script
 
 Puis ajouter les lignes suivantes au fichier `rootbase/etc/init.d/rcS` :
 
-```
+```sh
 ifconfig eth0 up
 udhcpc -i eth0
 ```
@@ -335,45 +335,48 @@ echo "multi on" >> etc/host.conf
 Pour une configuration plus exhaustive, on peut créer les fichiers :
 
 - `rootbase/etc/nsswitch.conf` :
-    ```
-    # /etc/nsswitch.conf: GNU Name Service Switch config.
 
-    passwd:     files
-    group:      files
-    shadow:     files
+```sh
+# /etc/nsswitch.conf: GNU Name Service Switch config.
 
-    hosts:      files dns
-    networks:   files
-    ```
+passwd:     files
+group:      files
+shadow:     files
+
+hosts:      files dns
+networks:   files
+```
 
 
 - `rootbase/etc/securetty` :
-    ```
-    # /etc/securetty: List of terminals on which root is allowed to login.
 
-    console
+```sh
+# /etc/securetty: List of terminals on which root is allowed to login.
 
-    # For people with serial port consoles
-    ttyS0
+console
 
-    # Standard consoles
-    tty1
-    tty2
-    tty3
-    tty4
-    tty5
-    tty6
-    tty7
-    ```
+# For people with serial port consoles
+ttyS0
+
+# Standard consoles
+tty1
+tty2
+tty3
+tty4
+tty5
+tty6
+tty7
+```
 
 - `rootbase/etc/shells` :
-    ```
-    # /etc/shells: valid login shells.
-    /bin/shell
-    /bin/sh
-    /bin/ash
-    /bin/hush
-    ```
+
+```sh
+# /etc/shells: valid login shells.
+/bin/shell
+/bin/sh
+/bin/ash
+/bin/hush
+```
 
 - `rootbase/etc/issue` :
     ```
@@ -381,24 +384,26 @@ Pour une configuration plus exhaustive, on peut créer les fichiers :
     ```
 
 - `rootbase/etc/busybox.conf` :
-    ```
-    # /etc/busybox.conf: Busybox configuration.
 
-    [SUID]
-    # Allow command to be run by anyone.
-    su = ssx root.root
-    passwd = ssx root.root
-    loadkmap = ssx root.root
-    mount = ssx root.root
-    reboot = ssx root.root
-    halt = ssx root.root
-    ```
+```sh
+# /etc/busybox.conf: Busybox configuration.
 
-    - on veillera aussi à protéger ce fichier :
+[SUID]
+# Allow command to be run by anyone.
+su = ssx root.root
+passwd = ssx root.root
+loadkmap = ssx root.root
+mount = ssx root.root
+reboot = ssx root.root
+halt = ssx root.root
 
-    ```sh
-    chmod 600 rootbase/etc/busybox.conf
-    ```
+```
+
+⟶ on veillera aussi à protéger ce fichier :
+
+```sh
+chmod 600 rootbase/etc/busybox.conf
+```
 
 
 # Utilitaires
@@ -408,27 +413,29 @@ Les scripts `cpio_creator`, `kernel_copy`, `rebuild_iso`, `send_home` créés à
 
 - `cpio_creator` :
 
-    ```sh
-    #!/bin/sh
-    HERE=$(pwd)
-    ROOTBASE=./rootbase
-    echo "The path is : $ROOTBASE."
-    echo "Creating ..."
-    cd $ROOTBASE
-    find ./* -print | cpio -o -Hnewc > $HERE/root
-    cd $HERE
-    cat root | gzip -9 > root.gz
-    rm root
-    mv root.gz rootcd/boot
-    echo "Done."
-    ```
+```sh
+#!/bin/sh
+HERE=$(pwd)
+ROOTBASE=./rootbase
+echo "The path is : $ROOTBASE."
+echo "Creating ..."
+cd $ROOTBASE
+find ./* -print | cpio -o -Hnewc > $HERE/root
+cd $HERE
+cat root | gzip -9 > root.gz
+rm root
+mv root.gz rootcd/boot
+echo "Done."
+```
 
 - `kernel_copy` :
 
-    ```sh
-    #!/bin/sh
-    cp ../kernel/linux-4.9/arch/x86_64/boot/bzImage rootcd/boot/vmlinuz
-    ```
+```sh
+
+#!/bin/sh
+cp ../kernel/linux-4.9/arch/x86_64/boot/bzImage rootcd/boot/vmlinuz
+
+```
 
 - `rebuild_iso [options]` : crée l'image iso du RIM Linux et la lit avec `qemu`
 
@@ -436,30 +443,30 @@ Les scripts `cpio_creator`, `kernel_copy`, `rebuild_iso`, `send_home` créés à
         - `-kernel` : copie le noyau `bzImage` créé dans le répertoire `../kernel`
         - `-kvm` : lance `qemu` avec l'option `-enable-kvm`
 
-    ```sh
-    #!/bin/sh
-    ./cpio_creator
-    if [ "$1" == "-kernel" ] || [ "$2" == "-kernel" ] ; then
-      ./kernel_copy
-      echo "Kernel copied"
-    else
-      echo "Kernel not copied"
-    fi
-    mkisofs -o output.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table rootcd
+```sh
+#!/bin/sh
+./cpio_creator
+if [ "$1" == "-kernel" ] || [ "$2" == "-kernel" ] ; then
+  ./kernel_copy
+  echo "Kernel copied"
+else
+  echo "Kernel not copied"
+fi
+mkisofs -o output.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table rootcd
 
-    if [ "$1" == "-kvm" ] || [ "$2" == "-kvm" ] ; then
-      echo "Qemu : KVM enabled"
-      qemu-system-x86_64 -m 4G -enable-kvm -cdrom output.iso
-    else
-      echo "Qemu : KVM disabled"
-      qemu-system-x86_64 -m 4G -cdrom output.iso
-    fi
-    ```
+if [ "$1" == "-kvm" ] || [ "$2" == "-kvm" ] ; then
+  echo "Qemu : KVM enabled"
+  qemu-system-x86_64 -m 4G -enable-kvm -cdrom output.iso
+else
+  echo "Qemu : KVM disabled"
+  qemu-system-x86_64 -m 4G -cdrom output.iso
+fi
+```
 
 - `send_home` :
 
-    ```sh
-    #!/bin/sh
-    rm -rf ~/RIM-Linux
-    cp -R ../RIM-Linux/ ~/                   
-    ```
+```sh
+#!/bin/sh
+rm -rf ~/RIM-Linux
+cp -R ../RIM-Linux/ ~/
+```
